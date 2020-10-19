@@ -1,0 +1,69 @@
+{% load static %}
+
+<header>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="{% url 'shop:product_list' %}" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+        <strong>Галлерея</strong>
+      </a>
+      <a class="navbar-brand" href="/">
+        SHOKOLAD DREAMS
+      </a>
+      <p class="navbar-brand" >Санкт-Петербург <br>+7-953-355-63-35</p>
+
+      <div id="subheader">
+        <div class="cart">
+        {% with total_items=cart|length %}
+            {% if cart|length > 0 %}
+                <a href="{% url "cart:cart_detail" %}" class="btn btn-outline-secondary" style="border: None;">
+                  <img src="{% static 'img/shopping-cart.png' %}" style="max-width: 64px; min-width: 24px;" alt="cart">
+                  <span style="font-size: 18px">₽</span><span>{{ cart.get_total_price }}</span>
+                </a>
+            {% else %}
+                <img src="{% static 'img/shopping-cart.png' %}" style="max-width: 64px; min-width: 24px;" alt="cart">
+            {% endif %}
+        {% endwith %}
+        </div>
+      </div>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="bg-dark collapse" id="navbarHeader" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-5 col-md-4 py-2">
+          <ul class="navbar-nav">
+            <li><h4>Категории</h4></li>
+            {% if category %}
+            <li class="nav-item2"class="nav-item">
+                <a class="nav-link" href="{% url 'shop:product_list' %}">Все</a>
+            </li>
+            {% endif %}
+            {% for c in categories %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <ul class="navbar-nav">
+             <li class="nav-item">
+              <a class="nav-link" href="#delivery">ДОСТАВКА</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about">О НАС</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#maps">КОНТАКТЫ</a>
+            </li>         
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

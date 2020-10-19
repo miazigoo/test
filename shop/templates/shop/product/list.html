@@ -1,0 +1,61 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}
+{% endblock %}
+{% block content %}
+<div class="album py-5 bg-light">
+<div class="container">
+  <div class="row">
+    <center class="col-md-12"><h1>{% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}</h1></center>
+    {% for product in products %}
+
+    <div class="card mb-4 shadow-sm">
+      <rect width="100%" height="100%" fill="#55595c"><img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" style="max-height: 200px; min-height: 200px;" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"></rect>
+      
+      <div class="card-body">
+        <center><h5 class="card-title">{{ product.name }}</h5></center>
+        <center><h6 class="card-title">Количество роз: {{ product.rouse }}</h6></center>
+        <p class="card-text">{{ product.description|truncatechars:120  }}</p>
+        <p class="card-text"><small class="text">₽{{ product.price }}</small></p>
+        <div class="d-flex justify-content-between align-items-center">
+          <br>
+          <br>
+            <a class="btn btn-outline-warning" href="{{ product.get_absolute_url }}" style="display: block;
+            margin-left: auto;
+            margin-right: auto">
+              <h5>Создать</h5>
+            </a>
+          <br>
+         
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+</div>
+
+
+
+    <!--<div id="main" class="product-list">
+        <center><h1>{% if category %}{{ category.name }}{% else %}Шоколадные розы{% endif %}</h1></center>
+        {% for product in products %}
+            <div class="item">
+                <a href="{{ product.get_absolute_url }}">
+                    <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                </a>
+                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
+                ₽{{ product.price }}
+            </div>
+        {% endfor %}
+    </div> -->
+    
+
+
+
+{% endblock %}
+
+
+

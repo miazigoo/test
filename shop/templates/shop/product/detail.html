@@ -1,0 +1,253 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% load l10n %}
+{% block title %}
+    {% if category %}{{ category.title }}{% else %}Шоколадные розы{% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="back">
+	
+<div class="container">
+    <div class="row">
+        {% if category.name == БУКЕТЫ %}
+        	{% include 'shop/product/bukety.html' %}
+        {% elif category.name == КОРЗИНКИ %}
+        	{% include 'shop/product/korzinki.html' %}
+        {% elif category.name == 'ШЛЯПНЫЕ КОРОБКИ' %}
+        	{% include 'shop/product/shlyapnye-korobki.html' %}
+        {% endif %}
+
+    <div class="col-lg-6">
+        <h1 class="text-center">
+            {{ product.name }} 
+        </h1>
+        <div class="">
+            <h4>
+                Ценa:  ₽<span class="myprice" name="myprice">00,00</span>
+            </h4>
+        </div>
+         <div class="">
+                 {{ product.description|linebreaks }} 
+        </div>
+      	
+	<form action="{% url 'cart:cart_add' product.id %}" method="post" id='form_buying_product' class='form-group'>
+    	{% csrf_token %}
+    	{{ formset.management_form }}
+
+    	{{ cart_product_form.rp }}
+		<div class="form">				    	
+	    	
+		    <div class="form-check">
+		    	{{ cart_product_form.quantity }}
+				<label class="control-label">
+					<h3>Количество роз<span style="color: red;">*</span></h3>
+				</label>
+					{{ cart_product_form.rouse }}
+			</div>
+
+			<div class="hidden">{{ cart_product_form.color }}</div>
+			
+			<label class="control-label"><h3>количество цветов роз<span style="color: red;">*</span></h3></label>
+
+			<div class="color form-check-inline ">
+				<div class="radio" style="margin-top: -5px;">
+                  <label for="id_color_0">
+                  	<input id="id_color_0" type="radio" name="color" class="hidden" value="{{ cart_product_form.color.0.field }}">
+                    <span class="img_radio_flex">
+                    	<img src="https://spb.youandishop.ru/image/cache/catalog/colors/white2-100x100.png" alt="1 цвет">
+                    </span>
+                    <br>
+                    <span class="name_radio_flex">1 цвет</span>
+                  </label>			
+				</div>
+																	  <!--BOF Related Options-->
+                <div class="radio" style="margin-top: -5px;">
+                  <label for="id_color_1">
+                  	<input id="id_color_1" type="radio" name="color" class="hidden" value="{{ cart_product_form.color.1.field }}">
+                    <span class="img_radio_flex">
+                    	<img src="https://spb.youandishop.ru/image/cache/catalog/colors/2color-100x100.png" alt="2 цвета">
+                    </span>
+                    <br>
+                    <span class="name_radio_flex">2 цвета</span>
+                </label>
+				</div>
+																	  <!--BOF Related Options-->
+                <div class="radio" style="margin-top: -5px;">
+                  <label for="id_color_2">
+                    <input id="id_color_2" type="radio" name="color" class="hidden" value="{{ cart_product_form.color.2.field }}">
+                    <span class="img_radio_flex">
+                    	<img src="https://spb.youandishop.ru/image/cache/catalog/colors/31color-100x100.png" alt="3 цвета">
+                    </span>
+                    <br>
+                    <span class="name_radio_flex">3 цвета</span>
+                  </label>
+				</div>
+		    </div>	
+	          
+		    <div class="col_type_hidden">
+		    	{{ cart_product_form.color_type1 }}
+		    	{{ cart_product_form.color_type2 }}
+		    	{{ cart_product_form.color_type3 }}
+			</div>
+
+			<div class="color_type1_1 form-check">
+			    <div class="hidden1">
+					
+					<label class="control-label">
+						<h4>Выберите первый цвет<span style="color: red;">*</span></h4>
+					</label>
+					<div class="radio_flex form-check-inline">
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type1_0">
+			              	<input id="id_color_type1_0" type="radio" name="color_type1" class="hidden" value="{{ cart_product_form.color_type1.0.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/white2-100x100.png" alt="Белый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type1_1">
+			              	<input id="id_color_type1_1" type="radio" name="color_type1" class="hidden" value="{{ cart_product_form.color_type1.1.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/blue2-100x100.png" alt="Голубой"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type1_2">
+			              	<input id="id_color_type1_2" type="radio" name="color_type1" class="hidden" value="{{ cart_product_form.color_type1.2.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/yellow2-100x100.png" alt="Желтый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type1_3">
+			              	<input id="id_color_type1_3" type="radio" name="color_type1" class="hidden" value="{{ cart_product_form.color_type1.3.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/brown2-100x100.png" alt="Шоколад"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="form-check form-check-inline">
+				<div class="hidden2">
+			    	
+			    	<label class="control-label">
+						<h4>Выберите второй цвет<span style="color: red;">*</span></h4>
+					</label>
+					<div class="radio_flex form-check-inline">
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type2_0">
+			              	<input id="id_color_type2_0" type="radio" name="color_type2" class="hidden" value="{{ cart_product_form.color_type2.0.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/white2-100x100.png" alt="Белый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type2_1">
+			              	<input id="id_color_type2_1" type="radio" name="color_type2" class="hidden" value="{{ cart_product_form.color_type2.1.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/blue2-100x100.png" alt="Голубой"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type2_2">
+			              	<input id="id_color_type2_2" type="radio" name="color_type2" class="hidden" value="{{ cart_product_form.color_type2.2.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/yellow2-100x100.png" alt="Желтый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type2_3">
+			              	<input id="id_color_type2_3" type="radio" name="color_type2" class="hidden" value="{{ cart_product_form.color_type2.3.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/brown2-100x100.png" alt="Шоколад"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+					</div>
+
+			    </div>
+			</div>
+
+			<div class="form-check form-check-inline">
+			    <div class="hidden3">
+			    	
+			    	<label class="control-label">
+						<h4>Выберите третий цвет<span style="color: red;">*</span></h4>
+					</label>
+					<div class="radio_flex form-check-inline">
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type3_0">
+			              	<input id="id_color_type3_0" type="radio" name="color_type3" class="hidden" value="{{ cart_product_form.color_type3.0.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/white2-100x100.png" alt="Белый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type3_1">
+			              	<input id="id_color_type3_1" type="radio" name="color_type3" class="hidden" value="{{ cart_product_form.color_type3.1.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/blue2-100x100.png" alt="Голубой"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type3_2">
+			              	<input id="id_color_type3_2" type="radio" name="color_type3" class="hidden" value="{{ cart_product_form.color_type3.2.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/yellow2-100x100.png" alt="Желтый"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+
+						<div class="radio coltype" style="margin-top: -5px;">
+			              <label for="id_color_type3_3">
+			              	<input id="id_color_type3_3" type="radio" name="color_type3" class="hidden" value="{{ cart_product_form.color_type3.3.field }}">
+			                <span class="img_radio_flex"><img src="https://spb.youandishop.ru/image/cache/catalog/colors/brown2-100x100.png" alt="Шоколад"></span>
+			                <span class="name_radio_flex"></span>
+			                <span class="price_radio_flex"></span>
+			              </label>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		<input type="submit" value="Add to cart" 
+			    			class="btn btn-outline-info"
+			    			id="submit_btn">
+
+	</form>
+
+              
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}
