@@ -9,17 +9,17 @@ from cart.cart import Cart
 import telepot
 
 #Anin
-#token = '1305283356:AAHg4mWw6KOK5QnJOBGsfRIlRr_XvEezXC8'
+token = '1305283356:AAHg4mWw6KOK5QnJOBGsfRIlRr_XvEezXC8'
 
 #my token
-token = '983548097:AAGozXlJbKd4-bxzsz6ZMtuSTFQMPguu7pc'
+#token = '983548097:AAGozXlJbKd4-bxzsz6ZMtuSTFQMPguu7pc'
 #token = '389460165:AAEimDJ0HY3tJk9sd9HX1iHvjjUIG0hhAtM'
 
 #Anin
 
-#my_id = 397019375
+my_id = 397019375
 #my test
-my_id = 672574518
+#my_id = 672574518
 telegramBot = telepot.Bot(token)
 
 def send_message(text):
