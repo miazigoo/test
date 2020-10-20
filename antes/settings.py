@@ -25,7 +25,7 @@ SECRET_KEY = 'r(&^kdd8zzl-s3*1b9vhrs$ck5h02w2166%x2gxv+57k(3t)&('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'my.deployed.url']
 
 
 # Application definition
@@ -127,11 +127,11 @@ CART_SESSION_ID = 'cart'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-)
-#STATIC_ROOT =os.path.join(BASE_DIR, 'static')
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, "static"),
+#     '/var/www/static/',
+# )
+STATIC_ROOT =os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
